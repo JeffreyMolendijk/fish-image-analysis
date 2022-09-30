@@ -1,0 +1,14 @@
+name: python-main
+run-name: Running main.py
+on: [push]
+jobs:
+  run-main:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        cache: 'pip' # caching pip dependencies
+    - run: pip install -r requirements.txt
+    - run: python main.py
