@@ -10,8 +10,8 @@ model = VGG16(weights='imagenet', include_top=False)
 import pandas as pd
 
 # Variables
-imdir = os.path.join('input', 'crop') # DIR containing images
-targetdir = os.path.join('input', 'cluster') + '\\' # DIR to copy clustered images to
+imdir = os.path.join('output', 'crop') # DIR containing images
+targetdir = os.path.join('output', 'cluster') + '\\' # DIR to copy clustered images to
 number_clusters = 5
 
 # Loop over files and get features
@@ -37,7 +37,7 @@ kmeans_result = pd.DataFrame()
 kmeans_result['files'] = filelist
 kmeans_result['labels'] = kmeans.labels_
 
-kmeans_result.to_excel(os.path.join('input', 'cluster', 'clusters.xlsx'))
+kmeans_result.to_excel(os.path.join('output', 'cluster', 'clusters.xlsx'))
 
 try:
     os.makedirs(targetdir)
