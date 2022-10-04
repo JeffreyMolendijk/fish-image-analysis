@@ -66,5 +66,5 @@ def rotate_crop():
         crop = rotated[min_crop_h:max_crop_h,min_crop_v:max_crop_v]
         
         # save results
-        cv2.imwrite(os.path.join('input', 'crop', file), crop)
+        cv2.imwrite(os.path.join('output', 'crop', file), crop)
 

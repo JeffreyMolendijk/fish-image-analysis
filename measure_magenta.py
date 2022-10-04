@@ -7,7 +7,7 @@ import pandas as pd
 def measure_magenta():
 
     files = [] # detect .tif files in crop folder
-    for file in os.listdir(os.path.join('input', 'crop')):
+    for file in os.listdir(os.path.join('output', 'crop')):
         if file.endswith('.tif'): files += [file]
         if file.endswith('.png'): files += [file] 
     
@@ -15,7 +15,7 @@ def measure_magenta():
     
     # loop that makes thresh, then records the sum to a pd
     for file in files:
-        img = cv2.imread(os.path.join('input', 'crop', file)) # read image in loop
+        img = cv2.imread(os.path.join('output', 'crop', file)) # read image in loop
         
         # threshold magenta
         lower = np.array([80, 0, 80])
@@ -28,6 +28,6 @@ def measure_magenta():
         fish_length = np.where(fish_length_density > (fish_length_density.max()/20))[0][-1] - np.where(fish_length_density > (fish_length_density.max()/20))[0][1]
         
         magenta_sum = magenta_sum.append({'file': file, 'magenta': thresh.sum(), 'length': fish_length, 'width': fish_width}, ignore_index=True)
-        cv2.imwrite(os.path.join('input', 'magenta', file), thresh)
+        cv2.imwrite(os.path.join('output', 'magenta', file), thresh)
     
-    magenta_sum.to_excel(os.path.join('input', 'magenta', 'magenta.xlsx'))
+    magenta_sum.to_excel(os.path.join('output', 'magenta', 'magenta.xlsx'))
